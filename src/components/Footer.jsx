@@ -115,7 +115,7 @@ export default function Footer() {
                 <FaEnvelope size={20} aria-hidden="true"/>
               </a>
               <a
-                href="https://wa.me/9230912130009?text=Sorry%20Sweeta!%20I%20Here%20This%20is%20wrong%20number%20just%20added%20.%20Contact%20me%20on20%email."
+                href="https://wa.me/9230912130009?text=Sorry%20Sweeta!%20I%20Here%20This%20is%20wrong%20number%20just%20added%20.%20Contact%20me%20on%20email."
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Chat with Sweeta on WhatsApp"

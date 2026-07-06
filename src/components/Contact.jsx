@@ -1,9 +1,15 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import {FaGithub,FaLinkedin, FaEnvelope, } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { ArrowUpRight } from "lucide-react";
+import {
+  ShieldCheck,
+  MapPin,
+  BriefcaseBusiness,
+  Clock3,
+  ArrowUpRight
+} from "lucide-react";
+
 
 export default function Contact() {
   const form = useRef();
@@ -11,50 +17,50 @@ export default function Contact() {
   const [sending, setSending] = useState(false);
 
   const sendEmail = (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const formData = new FormData(form.current);
+    const formData = new FormData(form.current);
 
-  const name = formData.get("from_name").trim();
-  const message = formData.get("message").trim();
+    const name = formData.get("from_name").trim();
+    const message = formData.get("message").trim();
 
-  const nameRegex = /^[A-Za-z]+(?:[ '-][A-Za-z]+)*$/;
+    const nameRegex = /^[A-Za-z]+(?:[ '-][A-Za-z]+)*$/;
 
-  if (!nameRegex.test(name)) {
-    toast.error("Please enter a valid name.");
-    return;
-  }
+    if (!nameRegex.test(name)) {
+      toast.error("Please enter a valid name.");
+      return;
+    }
 
-  if (message.length < 10) {
-    toast.error("Please describe your project in at least 10 characters.");
-    return;
-  }
+    if (message.length < 10) {
+      toast.error("Please describe your project in at least 10 characters.");
+      return;
+    }
 
-  setSending(true);
+    setSending(true);
 
-  emailjs
-    .sendForm(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      form.current,
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    )
-    .then(() => {
-      toast.success(
-        "Thanks! Your message has been sent. I'll get back to you soon."
-      );
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        form.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      .then(() => {
+        toast.success(
+          "Thanks! Your message has been sent. I'll get back to you soon."
+        );
 
-      form.current.reset();
-      setSending(false);
-    })
-    .catch((error) => {
-      console.error(error);
+        form.current.reset();
+        setSending(false);
+      })
+      .catch((error) => {
+        console.error(error);
 
-      toast.error("Something went wrong. Please try again.");
+        toast.error("Something went wrong. Please try again.");
 
-      setSending(false);
-    });
-};
+        setSending(false);
+      });
+  };
 
   return (
     <section
@@ -77,97 +83,224 @@ export default function Contact() {
             Let's Work Together
           </h2>
 
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          {/* <p className="text-gray-400 max-w-2xl mx-auto">
             Available for frontend development projects, React applications,
             landing pages and website redesigns.
+          </p> */}
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Whether you need a modern React application,
+            responsive website, or frontend improvements,
+            I'd be happy to discuss your project and help bring your ideas to life.
           </p>
+
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-10">
 
           {/* LEFT */}
 
-          <div className="space-y-5">
+          <div
+  className="
+  rounded-3xl
+  border
+  border-white/10
+  bg-white/[0.03]
+  backdrop-blur-xl
+  p-6
+  transition-all
+  duration-300
+  hover:border-cyan-400/40
+  hover:shadow-[0_0_35px_rgba(34,211,238,.12)]
+  "
+>
+  {/* Privacy */}
 
-            <a
-              href="mailto:sweetakcs@gmail.com"
-              className="flex items-center gap-4 p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/40 transition"
-            >
-              <FaEnvelope
-                size={26}
-                className="text-cyan-400"
-              />
+  <div className="flex items-start gap-4">
 
-              <div>
-                <h3 className="font-semibold">Email</h3>
+    <div
+      className="
+      flex
+      h-11
+      w-11
+      shrink-0
+      items-center
+      justify-center
+      rounded-xl
+      bg-cyan-400/10
+      "
+    >
+      <ShieldCheck
+        size={20}
+        className="text-cyan-400"
+        aria-hidden="true"
+      />
+    </div>
 
-                <p className="text-gray-400">
-                  sweetakcs@gmail.com
-                </p>
-              </div>
+    <div>
 
-            </a>
+      <h3 className="text-lg font-semibold text-white">
+        Privacy First
+      </h3>
 
-            <a
-              href="https://github.com/Sweeta-w"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-4 p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/40 transition"
-            >
-              <FaGithub
-                size={26}
-                className="text-cyan-400"
-              />
+      <p className="mt-2 text-gray-400 leading-7">
+        Your information is only used to respond to your inquiry.
+      </p>
 
-              <div>
-                <h3 className="font-semibold">GitHub</h3>
+    </div>
 
-                <p className="text-gray-400">
-                  github.com/Sweeta-w
-                </p>
-              </div>
+  </div>
 
-            </a>
+  {/* Divider */}
 
-            <a
-              href="https://www.linkedin.com/in/sweeta-k-7103972a6/"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-4 p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/40 transition"
-            >
-              <FaLinkedin
-                size={26}
-                className="text-cyan-400"
-              />
+  <div className="my-6 h-px bg-white/10" />
 
-              <div>
-                <h3 className="font-semibold">LinkedIn</h3>
+  {/* Location */}
 
-                <p className="text-gray-400 break-all">
-                  linkedin.com/in/sweeta-k-7103972a6
-                </p>
-              </div>
+  <div className="flex items-center gap-4 py-2">
 
-            </a>
+    <div
+      className="
+      flex
+      h-10
+      w-10
+      shrink-0
+      items-center
+      justify-center
+      rounded-lg
+      bg-cyan-400/10
+      "
+    >
+      <MapPin
+        size={18}
+        className="text-cyan-400"
+        aria-hidden="true"
+      />
+    </div>
 
-          </div>
+    <div>
+
+      <p className="text-xs uppercase tracking-[0.25em] text-gray-400">
+        Location
+      </p>
+
+      <p className="mt-1 text-white">
+        Pakistan
+      </p>
+
+    </div>
+
+  </div>
+  <hr
+  className="my-4 border-white/10"
+  aria-hidden="true"
+/>
+
+  {/* Availability */}
+
+  <div className="flex items-center gap-4 py-2">
+
+    <div
+      className="
+      flex
+      h-10
+      w-10
+      shrink-0
+      items-center
+      justify-center
+      rounded-lg
+      bg-cyan-400/10
+      "
+    >
+      <BriefcaseBusiness
+        size={18}
+        className="text-cyan-400"
+        aria-hidden="true"
+      />
+    </div>
+
+    <div>
+
+      <p className="text-xs uppercase tracking-[0.25em] text-gray-400">
+        Availability
+      </p>
+
+      <p className="mt-1 text-white">
+        Open to Remote Opportunities
+      </p>
+
+    </div>
+
+  </div>
+  <hr
+  className="my-4 border-white/10"
+  aria-hidden="true"
+/>
+
+  {/* Response */}
+
+  <div className="flex items-center gap-4 py-2">
+
+    <div
+      className="
+      flex
+      h-10
+      w-10
+      shrink-0
+      items-center
+      justify-center
+      rounded-lg
+      bg-cyan-400/10
+      "
+    >
+      <Clock3
+        size={18}
+        className="text-cyan-400"
+        aria-hidden="true"
+      />
+    </div>
+
+    <div>
+
+      <p className="text-xs uppercase tracking-[0.25em] text-gray-400">
+        Response Time
+      </p>
+
+      <p className="mt-1 text-white">
+        Usually within 24 hours
+      </p>
+
+    </div>
+
+  </div>
+  
+
+</div>
 
           {/* RIGHT */}
 
           <form
             ref={form}
+            aria-busy={sending}
             onSubmit={sendEmail}
             className="space-y-5"
           >
-<input
-  name="from_name"
-  type="text"
-  placeholder="Your Name"
-  required
-  minLength={3}
-  maxLength={50}
-  title="Please enter a valid name."
-  className="
+            <h3 className="text-2xl font-bold mb-2">
+              Send a Message
+            </h3>
+
+            <p className="text-gray-400 mb-6">
+              Fill out the form below and I'll get back to you as soon as possible.
+            </p>
+            <input
+              name="from_name"
+              type="text"
+              placeholder="Your Name"
+              required
+              minLength={3}
+              maxLength={50}
+              autoComplete="name"
+              title="Please enter a valid name."
+              className="
   w-full
   p-4
   rounded-xl
@@ -177,12 +310,13 @@ export default function Contact() {
   outline-none
   focus:border-cyan-400
   "
-/>
+            />
 
             <input
               name="from_email"
               type="email"
               placeholder="Your Email"
+              autoComplete="email"
               required
               className="
               w-full
@@ -197,13 +331,13 @@ export default function Contact() {
             />
 
             <textarea
-  name="message"
-  rows="6"
-  placeholder="Tell me about your project..."
-  required
-  minLength={10}
-  maxLength={1000}
-  className="
+              name="message"
+              rows="6"
+              placeholder="Tell me about your project..."
+              required
+              minLength={10}
+              maxLength={1000}
+              className="
   w-full
   p-4
   rounded-xl
@@ -214,12 +348,13 @@ export default function Contact() {
   resize-none
   focus:border-cyan-400
   "
-/>
+            />
 
             <button
-  type="submit"
-  disabled={sending}
-  className="
+              type="submit"
+              disabled={sending}
+              aria-label="Send message"
+              className="
   group
   relative
   overflow-hidden
@@ -250,10 +385,10 @@ export default function Contact() {
   disabled:opacity-60
   disabled:cursor-not-allowed
 "
->
-  {/* Animated background */}
-  <span
-    className="
+            >
+              {/* Animated background */}
+              <span
+                className="
     absolute
     inset-0
     bg-gradient-to-r
@@ -265,9 +400,9 @@ export default function Contact() {
     transition
     duration-500
     "
-  />
-  <div
-  className="
+              />
+              <div
+                className="
   absolute
   -top-20
   -left-20
@@ -281,15 +416,16 @@ export default function Contact() {
   transition
   duration-700
   "
-/>
+              />
 
-  {/* Content */}
-  <span className="relative flex items-center gap-3">
+              {/* Content */}
+              <span className="relative flex items-center gap-3">
 
-    {sending ? (
-      <>
-        <div
-          className="
+                {sending ? (
+                  <>
+                    <div
+                    aria-hidden="true"
+                      className="
           w-5
           h-5
           rounded-full
@@ -298,29 +434,35 @@ export default function Contact() {
           border-t-cyan-400
           animate-spin
           "
-        />
+                    />
 
-        Sending...
-      </>
-    ) : (
-      <>
-        Send Message
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message
 
-        <ArrowUpRight
-          size={18}
-          className="
+                    <ArrowUpRight
+                      size={18}
+                      aria-hidden="true"
+                      className="
           transition-all
           duration-300
           group-hover:translate-x-1
           group-hover:-translate-y-1
           group-hover:rotate-12
           "
-        />
-      </>
-    )}
+                    />
+                  </>
+                )}
 
-  </span>
-</button>
+              </span>
+            </button>
+
+
+
+
+
 
           </form>
 
